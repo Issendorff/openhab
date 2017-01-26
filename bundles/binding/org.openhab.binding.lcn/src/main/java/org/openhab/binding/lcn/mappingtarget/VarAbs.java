@@ -143,6 +143,9 @@ public class VarAbs extends TargetWithLcnAddr {
 						is2013 = info.getSwAge() >= 0x170206;
 					}
 				}
+				// TODO: Reimplement to support full 16 bit range by using multiple add/subtract commands.
+				// Also remove "reset to zero" as it causes threshold triggers and spikes in trend-logs.
+				// This change would of course be problematic for group targets, so keep the old code for that.
 				if (LcnDefs.Var.toVarId(this.var) != -1) {
 					// Absolute commands for variables are not supported.
 					// We fake the missing command by using reset and relative commands.

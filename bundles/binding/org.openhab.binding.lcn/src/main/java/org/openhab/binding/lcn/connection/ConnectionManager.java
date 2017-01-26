@@ -121,7 +121,7 @@ public class ConnectionManager implements Connection.Callback, Runnable {
 			return false;
 		}
 		conn.disconnect();
-		this.connectionsById.remove(id);		
+		this.connectionsById.remove(id.toUpperCase());
 		return true;
 	}
 

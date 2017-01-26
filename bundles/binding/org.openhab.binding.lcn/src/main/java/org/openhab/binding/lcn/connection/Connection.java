@@ -299,7 +299,6 @@ public class Connection {
 	 * @throws ClosedChannelException if channel is not open
 	 */
 	private void onConnected() throws ClosedChannelException {
-		this.isChannelConnecting = false;
 		this.lastPingTimeStamp = System.nanoTime();  // Start ping timer
 		synchronized (this.callback.getChannelRegisterSync()) {
 			this.callback.getSelector().wakeup();  // Wakes up a current or next select
@@ -324,8 +323,9 @@ public class Connection {
 				// Otherwise the selector will be used to finish the connection.
 				this.onConnected();
 			}
+			else
+				this.isChannelConnecting = true;
 			this.channel = channel;
-			this.isChannelConnecting = true;			
 		} catch (UnknownHostException ex) {
 			logger.warn(String.format("Unable to resolve host: %s", ex.getMessage()));
 		} catch (IOException ex) {
@@ -339,6 +339,7 @@ public class Connection {
 	 * @throws IOException if connection cannot be established
 	 */
 	void finishConnect() throws IOException {
+		this.isChannelConnecting = false;
 		if (this.channel.finishConnect()) {
 			this.onConnected();
 		}

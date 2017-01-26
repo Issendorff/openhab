@@ -270,6 +270,10 @@ public class ModInfo {
 					boolean hasTypeInResponse = LcnDefs.Var.hasTypeInResponse(kv.getKey(), this.swAge);
 					if (hasTypeInResponse || this.lastRequestedVarWithoutTypeInResponse == LcnDefs.Var.UNKNOWN) {
 						try {
+							// Forces initialization of counters (variables 1..12) after a module-reset.
+							// Otherwise they won't report their status.
+							if (LcnDefs.Var.toVarId(kv.Key) != -1)
+								conn.queue(this.addr, true, PckGenerator.varRel(kv.getKey(), LcnDefs.RelVarRef.CURRENT, 0, this.swAge >= 0x170206));  // Using "rel 0" will not alter the value if there is already one
 							conn.queue(this.addr, false, PckGenerator.requestVarStatus(kv.getKey(), this.swAge));
 							r.onRequestSent(currTime);
 							if (!hasTypeInResponse) {									

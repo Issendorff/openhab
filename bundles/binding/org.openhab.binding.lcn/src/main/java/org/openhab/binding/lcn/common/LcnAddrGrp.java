@@ -15,7 +15,7 @@ package org.openhab.binding.lcn.common;
  *  
  * @author Tobias Jüttner
  */
-public class LcnAddrGrp extends LcnAddr implements Comparable<LcnAddrMod> {
+public class LcnAddrGrp extends LcnAddr implements Comparable<LcnAddrGrp> {
 	
 	/** The group id. */
 	private final int grpId;
@@ -91,7 +91,7 @@ public class LcnAddrGrp extends LcnAddr implements Comparable<LcnAddrMod> {
 	
 	/** {@inheritDoc} */
 	@Override
-	public int compareTo(LcnAddrMod other)  {
+	public int compareTo(LcnAddrGrp other)  {
 		return this.hashCode() - other.hashCode(); 
 	}
 	

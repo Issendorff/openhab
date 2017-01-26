@@ -112,7 +112,7 @@ public abstract class LcnAddr {
 		 * @return the reversed value
 		 * @throws IllegalArgumentException if value is out of range (not unsigned 8 bit)
 		 */
-		static int reverseUInt8(int value) throws IllegalArgumentException{
+		static int reverseUInt8(int value) throws IllegalArgumentException {
 			if (value < 0 || value > 255) {
 				throw new IllegalArgumentException();
 			}

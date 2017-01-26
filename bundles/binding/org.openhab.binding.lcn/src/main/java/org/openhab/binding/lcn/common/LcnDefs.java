@@ -104,13 +104,13 @@ public final class LcnDefs {
 		
 		/** Helper array to get {@link Var} by numeric id. */
 		private static final Var[] varIdToVarArray = new Var[] {
-			Var.VAR1ORTVAR, Var.VAR2ORR1VAR, Var.VAR3ORR2VAR, Var.VAR4, Var.VAR5,
-			Var.VAR6, Var.VAR7, Var.VAR8, Var.VAR9, Var.VAR10, Var.VAR11, Var.VAR12
+			VAR1ORTVAR, VAR2ORR1VAR, VAR3ORR2VAR, VAR4, VAR5,
+			VAR6, VAR7, VAR8, VAR9, VAR10, VAR11, VAR12
 		};
 		
 		/** Helper array to get set-point {@link Var} by numeric id. */
 		private static final Var[] setVarIdToVarArray = new Var[] {
-			Var.R1VARSETPOINT, Var.R2VARSETPOINT
+			R1VARSETPOINT, R2VARSETPOINT
 		};
 		
 		/** Helper arrays to get threshold {@link Var} by numeric id. */
@@ -123,7 +123,7 @@ public final class LcnDefs {
 		
 		/** Helper array to get S0-input {@link Var} by numeric id. */
 		private static final Var[] s0IdToVarArray = new Var[] {
-			Var.S0INPUT1, Var.S0INPUT2, Var.S0INPUT3, Var.S0INPUT4
+			S0INPUT1, S0INPUT2, S0INPUT3, S0INPUT4
 		};
 	
 		/**
@@ -279,7 +279,7 @@ public final class LcnDefs {
 		 * @return true if lockable
 		 */
 		public static boolean isLockableRegulatorSource(Var var) {
-            return var == R1VARSETPOINT || var == Var.R2VARSETPOINT;
+            return var == R1VARSETPOINT || var == R2VARSETPOINT;
         }
 
 		/**
@@ -664,7 +664,7 @@ public final class LcnDefs {
 		 * @return the variable value (never null)
 		 */
 		public static VarValue fromAmpere(double a) {
-			return new VarValue((int)Math.round(a * 100));
+			return new VarValue((int)Math.round(a * 100000));
 		}
 		
 		/**
@@ -825,7 +825,7 @@ public final class LcnDefs {
 		 * @return the converted value
 		 */
 		public double toAmpere() {
-			return (double)this.nativeValue / 100;
+			return (double)this.nativeValue / 100000;
 		}
 		
 		/**
@@ -878,6 +878,7 @@ public final class LcnDefs {
 						else {
 							ret = new DecimalFormat("0").format(v.toLuxT());
 						}
+						break;
 					case LUX_I:
 						if (v.toNative() > 1152) {  // Max. value the HW can do
 							ret = "---";
